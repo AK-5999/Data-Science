@@ -56,3 +56,101 @@ In impure split the Gini impurity comes out to be 0.5 and in pure split it is 0.
 gini impurity is preferrable over entropy because of involvement of log it may slow down.
 
 Now if you have multiple features, you use information gain to know how to make the tree using the given features whether which feature will start and which one will follow later. The feature starting with which the information gain calculation comes out to be the most should be the one with which the decision tree should be started.
+
+# Why Gini Impurity Is Considered Over Entropy
+
+Both **Gini Impurity** and **Entropy** are used in decision trees to measure how “pure” a split is. However, in practice, many algorithms (like CART) prefer **Gini Impurity**. Here’s why:
+
+---
+
+## 1️⃣ Computational Efficiency (Main Practical Reason)
+
+### Entropy Formula
+
+\[
+H = -\sum p_i \log_2(p_i)
+\]
+
+### Gini Impurity Formula
+
+\[
+G = 1 - \sum p_i^2
+\]
+
+Entropy uses logarithmic calculations, while Gini uses only multiplication and squaring.
+
+➡️ Logarithms are computationally heavier than basic arithmetic operations.
+
+👉 When training large decision trees on large datasets, **Gini is faster**.
+
+That’s why:
+
+- **CART (Classification and Regression Trees)** uses **Gini**
+- **ID3** uses **Entropy (Information Gain)**
+- **C4.5** uses **Entropy**
+
+---
+
+## 2️⃣ Very Similar Behavior in Practice
+
+For most datasets:
+
+- Gini and Entropy usually choose **the same split**
+- Their impurity curves are very similar
+- Accuracy differences are often negligible
+
+If performance is nearly identical, the faster metric (Gini) is often preferred.
+
+---
+
+## 3️⃣ Mathematical Simplicity
+
+Gini impurity has a clean probabilistic interpretation:
+
+> It represents the probability of misclassifying a randomly chosen element if it were randomly labeled according to the distribution in the node.
+
+This makes it intuitive for classification tasks.
+
+---
+
+## 4️⃣ Sensitivity Differences
+
+- **Gini** tends to isolate the most frequent class slightly faster.
+- **Entropy** is slightly more sensitive to changes in small probability values.
+
+In practice, this difference is usually minor.
+
+---
+
+## 📊 Shape Comparison (Binary Classification Case)
+
+For two classes with probability \( p \):
+
+- Both metrics are **0 when the node is pure** (p = 0 or 1)
+- Both are **maximum at p = 0.5**
+- Entropy has a slightly steeper curve
+- Gini is smoother and computationally simpler
+
+---
+
+## 🚀 When Should You Prefer Each?
+
+| Scenario | Recommended Metric |
+|----------|-------------------|
+| Large dataset | Gini (faster) |
+| Theoretical information-theory basis required | Entropy |
+| Using CART | Gini (default) |
+| Using ID3 or C4.5 | Entropy |
+
+---
+
+## 🔎 Bottom Line
+
+Gini impurity is often preferred because:
+
+- ✅ Computationally faster  
+- ✅ Produces nearly identical results  
+- ✅ Simpler mathematically  
+- ✅ Works very well in practice  
+
+It’s not fundamentally “better” than Entropy — it’s just more computationally efficient while delivering similar performance.
