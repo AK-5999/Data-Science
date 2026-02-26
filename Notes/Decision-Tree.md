@@ -389,15 +389,6 @@ Information Gain prefers splits that:
 - Create many small, pure partitions
 - Even if those partitions are not meaningful
 - A feature with many unique categories can artificially create very pure splits.
-
-### 🔎 How It Happens
-
-Information Gain formula:
-
-\[
-IG = H(\text{parent}) - \sum \frac{|child|}{|parent|} H(\text{child})
-\]
-
 - Features with many unique values (high cardinality) can produce **leaf nodes with only one sample**.  
 - Each such leaf has entropy = 0 → maximum Information Gain.  
 - The algorithm treats this as the “best split,” even if it’s meaningless.
@@ -412,7 +403,7 @@ Features:
 - Student_ID (unique for every student)
 
 Now suppose we split on:
-🔹 Feature: Student_ID
+- Feature: Student_ID
 
 When we split by Student_ID:
 - Each leaf node contains exactly one student
@@ -427,6 +418,13 @@ But this split is useless because:
 - It doesn’t generalize
 - It memorizes the training data
 - It’s just overfitting
+
+### 🔎 How It Happens
+
+Information Gain formula:
+
+<img width="517" height="108" alt="image" src="https://github.com/user-attachments/assets/3392a9d4-0454-4c47-b04d-116ca92fca24" />
+
 
 If each child has:
 - 1 sample
@@ -444,6 +442,7 @@ Even though it's meaningless.
 
 Gini impurity behaves similarly:
 
+<img width="225" height="70" alt="image" src="https://github.com/user-attachments/assets/d843a21a-8296-422a-849a-a2abe66f3153" />
 
 
 
@@ -469,7 +468,7 @@ Examples:
 These features:
 - Allow many splits
 - Increase chance of achieving high purity
-But do not provide real predictive structure
+- But do not provide real predictive structure
 
 ---
 
@@ -491,9 +490,8 @@ But do not provide real predictive structure
 
 The Gain Ratio modifies Information Gain:
 
+<img width="392" height="84" alt="image" src="https://github.com/user-attachments/assets/6de40007-229f-4b79-818e-92e7135a7160" />
 
-
-Gain Ratio= Split Information / Information Gain
 	​
 Split Information penalizes:
 - Features that create many small partitions
