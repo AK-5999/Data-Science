@@ -32,6 +32,9 @@ These measure how “pure” a dataset subset is, which guides the selection of 
 
 These measure how features should be selected.
 
+<img width="270" height="186" alt="image" src="https://github.com/user-attachments/assets/2ef13a96-0022-43ec-913b-8926f5d8eb56" />
+
+
 ## 🧩 Intuition Behind the Learning Process
 
 - The classifier starts with all training data.
