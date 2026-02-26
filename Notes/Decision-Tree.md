@@ -67,15 +67,8 @@ Both **Gini Impurity** and **Entropy** are used in decision trees to measure how
 
 ### Entropy Formula
 
-\[
-H = -\sum p_i \log_2(p_i)
-\]
+<img width="764" height="220" alt="image" src="https://github.com/user-attachments/assets/85c17a55-326e-4c51-b40d-d4b7f9a8c1bb" />
 
-### Gini Impurity Formula
-
-\[
-G = 1 - \sum p_i^2
-\]
 
 Entropy uses logarithmic calculations, while Gini uses only multiplication and squaring.
 
