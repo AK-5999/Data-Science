@@ -49,10 +49,13 @@ In Cart the decision tress spilts into binary trees.
 To check for Pure split two techniques called Entropy and Gini impurity are used and INformation gain (how the features are selected) is used.
 
 The range of entropy remains between 0 to 1.
+entropy range: 0 to log2(n) where n is number of classes
 When H(S) is zero then that is pure split. And when H(s) is 1 then that is impure split ie equal distribution (eg 3yes and 3nos).
-The gini impurity ranges between 0 to 0.5. 
-In impure split the Gini impurity comes out to be 0.5 and in pure split it is 0. 
 
+
+The gini impurity ranges between 0 to 0.5 for binary classification.
+gini impurity range: 0 to (1 - (1/n)) where n is number of classes
+In impure split the Gini impurity comes out to be 0.5 and in pure split it is 0. 
 gini impurity is preferrable over entropy because of involvement of log it may slow down.
 
 Now if you have multiple features, you use information gain to know how to make the tree using the given features whether which feature will start and which one will follow later. The feature starting with which the information gain calculation comes out to be the most should be the one with which the decision tree should be started.
