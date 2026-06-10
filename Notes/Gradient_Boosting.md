@@ -71,6 +71,9 @@ Step 6: Train again a new tree to predict new residual error: r_pred_2.
 
 follow the steps.
 
+<img width="964" height="460" alt="image" src="https://github.com/user-attachments/assets/38ff6b18-5f01-4bfb-bc15-fc2ca0f80b58" />
+
+
 ## Why is it called "Gradient" Boosting?
 
 A common misconception is that Gradient Boosting *only* learns residuals ($y - \hat{y}$). **This is only true when using MSE loss.** In a generalized setting, Gradient Boosting performing **Gradient Descent in the functional space**. Each new tree learns the **negative gradient of the loss function** with respect to the current predictions.
