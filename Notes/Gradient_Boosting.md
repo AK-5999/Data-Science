@@ -29,44 +29,47 @@ Where:
 Our objective is to learn an ensemble function $F(x)$ such that $F(x) \approx y$ by minimizing a specified loss function $L(y, F(x))$.
 
 ### Step 1: Initial Prediction
-For Regression with Mean Squared Error (MSE), the optimal initial prediction that minimizes the loss is the **mean** of the target values.
-$$F_0(x) = \frac{1}{N} \sum_{i=1}^{N} y_i$$
-*This means every sample initially receives the exact same baseline prediction.*
+Pehla step bina kisi tree ke hota hai. Regression ke liye hum pure $y$ (target variable) ka mean nikalte hain. Isko hum $F_0(x)$ ya aapki language mein y_pred_1 bol sakte hain.
+
 
 ### Step 2: Compute Residuals
-Calculate the errors made by the current model for each sample $i$:
-$$r_{i,1} = y_i - F_0(x_i)$$
-*Residuals represent the magnitude and direction by which the current predictions are incorrect.*
+Iske baad hum actual $y$ aur y_pred_1 ka difference nikalte hain. Agar loss function Mean Squared Error (MSE) hai, to ye difference simple subtraction hota hai:
 
+$$r_1$$ = y - y_pred_1
 ### Step 3: Train First Tree
-Train a Decision Tree where:
-* **Input:** $X$
-* **Target:** $r_{i,1}$ (The residuals)
-
-The tree learns a mapping $h_1(x)$ which approximates these residuals.
+Fir hum ek Decision Tree train karte hain jahan inputs $X$ hote hain, lekin target $y$ nahi, balki ye residuals ($r_1$) hote hain. Ye tree hume predict karke dega r_1_pred.
 
 ### Step 4: Update Predictions
-Add a scaled fraction of the tree's prediction to the current model using a learning rate ($\eta$):
-$$F_1(x) = F_0(x) + \eta \cdot h_1(x)$$
-Where $0.01 \le \eta \le 0.3$ typically.
+Add a scaled fraction of the tree's prediction to the current model using a learning rate (learning_rate: $\eta$):
+Pehle tree ke train hone ke baad, hum apne original prediction ko update karte hain using predicted value (r_1_pred) aur learning rate ($\eta$) ke saath hota hai:
 
+y_pred_2 = y_pred_1 + ($\eta$ * r_1_pred)
 ### Step 5: Compute New Residuals
-Using the updated model $F_1(x)$, compute the new pseudo-residuals:
-$$r_{i,2} = y_i - F_1(x_i)$$
+Using the updated model y_pred_2, compute the new pseudo-residuals:
+
+$$r_{2}$$ = y - y_pred_2
 *These residuals are generally smaller in magnitude than the first iteration.*
 
 ### Step 6: Train Second Tree & Repeat
-Train another tree $h_2(x)$ to predict $r_{i,2}$, and update again:
-$$F_2(x) = F_1(x) + \eta \cdot h_2(x) = F_0(x) + \eta \cdot h_1(x) + \eta \cdot h_2(x)$$
-
-### General Update Rule
-After $m$ trees, the prediction is:
-$$F_m(x) = F_{m-1}(x) + \eta \cdot h_m(x)$$
-
-Expanded form after $M$ total trees:
-$$F_M(x) = F_0(x) + \eta \sum_{m=1}^{M} h_m(x)$$
+Train another tree to predict $$r_{2}$$, and update again by same rule.
 
 ---
+
+## Mathematics algorithm
+
+Step 1: Calculate first y_pred_1.
+
+Step 2: calculate loss function using true label y and y_pred_1 and called them r1 (residual error).
+
+Step 3: Train a tree to predict residual error: r_pred_1
+
+Step 4: Calculate y_pred_2 using y_pred_1, learning rate and all previous residuals r.
+
+Step 5: calculate new loss function using y_pred_2 and true label and call them r2.
+
+Step 6: Train again a new tree to predict new residual error: r_pred_2.
+
+follow the steps.
 
 ## Why is it called "Gradient" Boosting?
 
